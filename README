@@ -1,8 +1,6 @@
-This is a simple attempt to create a working Vector class. Initially intended
-to support 3D vectors, it turned out to be easier to support vectors of
-any dimension.
+This is a simple attempt to create a working polynomial in one-variable class.
 
-Math::Vector requires Rakudo from 7/25/2010 or later.
+Math::Polynomial requires Rakudo from 7/25/2010 or later.
 
 Build sequence:
 
