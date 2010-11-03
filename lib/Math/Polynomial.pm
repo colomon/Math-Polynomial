@@ -30,7 +30,7 @@ class Math::Polynomial
 
     multi method perl() returns Str
     {
-        self.WHAT.perl ~ ".new(" ~ @.coefficients.map({.perl}).join(', ') ~ ")";
+        self.WHAT.perl ~ ".new(" ~ @.coefficients».perl.join(', ') ~ ")";
     }
 
     multi method evaluate($x)
