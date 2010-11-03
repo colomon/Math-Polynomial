@@ -13,14 +13,9 @@ class Math::Polynomial
             @x.pop;
         }
 
-        if (@x.elems == 0)
-        {
-            self.bless(*, coefficients => 0);
-        }
-        else
-        {
-            self.bless(*, coefficients => @x);
-        }
+        @x.push: 0 if @x.elems == 0;
+
+        self.bless(*, coefficients => @x);
     }
 
     multi method new (@x is copy)
@@ -32,14 +27,9 @@ class Math::Polynomial
             @x.pop;
         }
 
-        if (@x.elems == 0)
-        {
-            self.bless(*, coefficients => 0);
-        }
-        else
-        {
-            self.bless(*, coefficients => @x);
-        }
+        @x.push: 0 if @x.elems == 0;
+
+        self.bless(*, coefficients => @x);
     }
 
     our Str multi method Str()
