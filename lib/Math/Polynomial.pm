@@ -4,7 +4,7 @@ class Math::Polynomial
 {
     has @.coefficients;
 
-    multi method new (*@x is copy)
+    multi method new (*@x)
     {
         self.new: @x.item;
     }
