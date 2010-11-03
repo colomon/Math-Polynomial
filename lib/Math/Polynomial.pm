@@ -55,14 +55,14 @@ class Math::Polynomial
             }
         }
 
-        Math::Polynomial.new: @poly;
+        $a.new: @poly;
     }
 
     multi sub infix:<+>(Math::Polynomial $a, $b) is export(:DEFAULT)
     {
         my @ac = $a.coefficients;
         @ac[0] += $b;
-        return Math::Polynomial.new: @ac;
+        return $a.new: @ac;
     }
 
     multi sub infix:<+>($b, Math::Polynomial $a) is export(:DEFAULT)
@@ -72,7 +72,7 @@ class Math::Polynomial
 
     multi sub prefix:<->(Math::Polynomial $a) is export(:DEFAULT)
     {
-        Math::Polynomial.new: $a.coefficients.map({-$_});
+        $a.new: $a.coefficients.map({-$_});
     }
 
     multi sub infix:<->(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT)
@@ -84,7 +84,7 @@ class Math::Polynomial
     {
         my @ac = $a.coefficients;
         @ac[0] -= $b;
-        return Math::Polynomial.new: @ac;
+        return $a.new: @ac;
     }
 
     multi sub infix:<->($b, Math::Polynomial $a) is export(:DEFAULT)
@@ -103,21 +103,21 @@ class Math::Polynomial
             }
         }
 
-        return Math::Polynomial.new: @coef;
+        return $a.new: @coef;
     }
 
     multi sub infix:<*>(Math::Polynomial $a, $b) is export(:DEFAULT)
     {
-        Math::Polynomial.new: $a.coefficients >>*>> $b;
+        $a.new: $a.coefficients >>*>> $b;
     }
 
     multi sub infix:<*>($b, Math::Polynomial $a) is export(:DEFAULT)
     {
-        Math::Polynomial.new: $a.coefficients >>*>> $b;
+        $a.new: $a.coefficients >>*>> $b;
     }
 
     multi sub infix:</>(Math::Polynomial $a, $b) is export(:DEFAULT)
     {
-        Math::Polynomial.new: $a.coefficients >>/>> $b;
+        $a.new: $a.coefficients >>/>> $b;
     }
 }
