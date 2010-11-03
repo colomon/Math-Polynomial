@@ -35,12 +35,7 @@ class Math::Polynomial
 
     method evaluate($x)
     {
-        # would be more elegant with Z+, once that works
-        my $result = @.coefficients[0] * 0;
-        for @.coefficients Z (1, $x, $x * $x ... *) -> $a, $z {
-            $result = $result + $a * $z;
-        }
-        $result;
+        @.coefficients.reverse.reduce: { $^a * $x + $^b };
     }
 
     multi sub infix:<+>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT)
