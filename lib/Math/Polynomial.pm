@@ -6,16 +6,7 @@ class Math::Polynomial
 
     multi method new (*@x is copy)
     {
-        while @x.elems > 1 && @x[*-1].abs < 1e-13
-        {
-            # say @x.perl;
-            # say @x[*-1];
-            @x.pop;
-        }
-
-        @x.push: 0 if @x.elems == 0;
-
-        self.bless(*, coefficients => @x);
+        self.new( @x.item );
     }
 
     multi method new (@x is copy)
