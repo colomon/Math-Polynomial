@@ -25,7 +25,7 @@ class Math::Polynomial
 
     multi method Str() returns Str
     {
-       (^(@.coefficients.elems)).map({"{@.coefficients[$_]} x^$_"}).reverse.join(" + ");
+       @.coefficients.keys.map({"{@.coefficients[$_]} x^$_"}).reverse.join(" + ");
     }
 
     multi method perl() returns Str
@@ -95,9 +95,9 @@ class Math::Polynomial
     multi sub infix:<*>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT)
     {
         my @coef = 0.0 xx ($a.coefficients.elems + $b.coefficients.elems - 1);
-        for ^($a.coefficients.elems) -> $m
+        for $a.coefficients.keys -> $m
         {
-            for ^($b.coefficients.elems) -> $n
+            for $b.coefficients.keys -> $n
             {
                 @coef[$m + $n] += $a.coefficients[$m] * $b.coefficients[$n];
             }
