@@ -88,7 +88,7 @@ class Math::Polynomial
 
     multi sub infix:<*>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT)
     {
-        my @coef = 0.0 xx ($a.coefficients.elems + $b.coefficients.elems - 1);
+        my @coef;
         for     $a.coefficients.kv -> $ak, $av {
             for $b.coefficients.kv -> $bk, $bv {
                 @coef[ $ak + $bk ] += $av * $bv;
