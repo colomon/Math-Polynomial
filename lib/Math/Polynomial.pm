@@ -25,7 +25,7 @@ class Math::Polynomial
 
     multi method Str() returns Str
     {
-       @.coefficients.keys.map({"{@.coefficients[$_]} x^$_"}).reverse.join(" + ");
+        @.coefficients.keys.map({"{@.coefficients[$_]} x^$_"}).reverse.join(" + ");
     }
 
     multi method perl() returns Str
