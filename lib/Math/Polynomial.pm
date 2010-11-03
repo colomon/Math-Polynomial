@@ -23,17 +23,17 @@ class Math::Polynomial
         self.bless: *, coefficients => @x;
     }
 
-    our Str multi method Str()
+    multi method Str() returns Str
     {
        (^(@.coefficients.elems)).map({"{@.coefficients[$_]} x^$_"}).reverse.join(" + ");
     }
 
-    our Str multi method perl()
+    multi method perl() returns Str
     {
         self.WHAT.perl ~ ".new(" ~ @.coefficients.map({.perl}).join(', ') ~ ")";
     }
 
-    our multi method evaluate($x)
+    multi method evaluate($x)
     {
         # would be more elegant with Z+, once that works
         my $result = @.coefficients[0] * 0;
