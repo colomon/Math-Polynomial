@@ -3,8 +3,8 @@ use v6;
 class Math::Polynomial
 {
     has @.coefficients;
-    
-    multi method new (*@x is copy) 
+
+    multi method new (*@x is copy)
     {
         while @x.elems > 1 && @x[*-1].abs < 1e-13
         {
@@ -12,7 +12,7 @@ class Math::Polynomial
             say @x[*-1];
             @x.pop;
         }
-        
+
         if (@x.elems == 0)
         {
             self.bless(*, coefficients => 0);
@@ -22,8 +22,8 @@ class Math::Polynomial
             self.bless(*, coefficients => @x);
         }
     }
-    
-    multi method new (@x is copy) 
+
+    multi method new (@x is copy)
     {
         while @x.elems > 1 && @x[*-1].abs < 1e-13
         {
@@ -31,7 +31,7 @@ class Math::Polynomial
             # say @x[*-1];
             @x.pop;
         }
-        
+
         if (@x.elems == 0)
         {
             self.bless(*, coefficients => 0);
@@ -41,17 +41,17 @@ class Math::Polynomial
             self.bless(*, coefficients => @x);
         }
     }
-    
-    our Str multi method Str() 
+
+    our Str multi method Str()
     {
        (^(@.coefficients.elems)).map({"{@.coefficients[$_]} x^$_"}).reverse.join(" + ");
     }
-    
+
     our Str multi method perl()
     {
-        self.WHAT.perl ~ ".new(" ~ @.coefficients.map({.perl}).join(', ') ~ ")";        
+        self.WHAT.perl ~ ".new(" ~ @.coefficients.map({.perl}).join(', ') ~ ")";
     }
-    
+
     our multi method evaluate($x)
     {
         # would be more elegant with Z+, once that works
@@ -73,7 +73,7 @@ class Math::Polynomial
                 take $b.coefficients[$i];
             }
         }
-        
+
         Math::Polynomial.new(@poly);
     }
 
