@@ -8,8 +8,8 @@ class Math::Polynomial
     {
         while @x.elems > 1 && @x[*-1].abs < 1e-13
         {
-            say @x.perl;
-            say @x[*-1];
+            # say @x.perl;
+            # say @x[*-1];
             @x.pop;
         }
 
