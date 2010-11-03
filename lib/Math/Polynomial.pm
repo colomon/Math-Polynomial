@@ -45,17 +45,11 @@ class Math::Polynomial
 
     multi sub infix:<+>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT)
     {
-        my @poly = gather for ^(+$a.coefficients max +$b.coefficients) -> $i {
-            if $i < +$a.coefficients && $i < +$b.coefficients {
-                take $a.coefficients[$i] + $b.coefficients[$i];
-            } elsif $i < +$a.coefficients {
-                take $a.coefficients[$i];
-            } else {
-                take $b.coefficients[$i];
-            }
-        }
+        my $max =   $a.coefficients.elems
+                max $b.coefficients.elems;
 
-        $a.new: @poly;
+        $a.new: (    $a.coefficients, 0 xx *
+                  Z+ $b.coefficients, 0 xx * )[^$max];
     }
 
     multi sub infix:<+>(Math::Polynomial $a, $b) is export(:DEFAULT)
