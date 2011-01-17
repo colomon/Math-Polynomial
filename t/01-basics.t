@@ -109,4 +109,4 @@ for ^10 -> $x
     is_approx($product.evaluate($x), $p.evaluate($x) * $p2.evaluate($x) / 5.5, "product / 5.5 = p * p2 / 5.5 for $x");
 }
 
-done_testing;
+done;
