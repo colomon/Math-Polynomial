@@ -30,7 +30,7 @@ class Math::Polynomial
 
     method perl() returns Str
     {
-        self.WHAT.perl ~ ".new(" ~ @.coefficients».perl.join(', ') ~ ")";
+        "Math::Polynomial" ~ ".new(" ~ @.coefficients».perl.join(', ') ~ ")";
     }
 
     method evaluate($x)
