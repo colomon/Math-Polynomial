@@ -181,8 +181,7 @@ class Math::Polynomial {
         return $this.new($this.coefficients[0] ** $exp) if 0 == $this.degree;
         my $result = Any;
         while $exp {
-            say :$exp.perl;
-            if 1 & $exp {
+            if 1 +& $exp {
                 $result = $result.defined ?? ($this * $result) % $that !! $this;
             }
             $exp +>= 1 and $this = ($this * $this) % $that;
