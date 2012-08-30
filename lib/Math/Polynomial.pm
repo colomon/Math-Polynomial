@@ -29,6 +29,22 @@ class Math::Polynomial {
         @.coefficients.reverse.reduce({ $^a * $x + $^b });
     }
 
+    method degree() { @.coefficients - 1 }
+
+    method is-zero() { @.coefficients == 1 && @.coefficients[0] == 0 }
+    method is-nonzero() { !self.is-zero; }
+
+    multi sub infix:<==>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT) {
+        my $max =   $a.coefficients.elems
+                max $b.coefficients.elems;
+
+        all((    $a.coefficients, 0 xx *
+             Z== $b.coefficients, 0 xx * )[^$max]);
+    }
+    multi sub infix:<!=>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT) {
+        !($a == $b);
+    }
+
     multi sub infix:<+>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT) {
         my $max =   $a.coefficients.elems
                 max $b.coefficients.elems;
