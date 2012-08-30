@@ -117,28 +117,27 @@ class Math::Polynomial {
                 !! ($a xx $b).reduce(* * *);
     }
 
-    # sub _divmod($this, $that) {
-    #     my @den  = $that.coefficients;
-    #     @den or croak 'division by zero polynomial';
-    #     my $hd   = pop @den;
-    #     if ($that->is_monic) {
-    #         undef $hd;
-    #     }
-    #     my @rem  = $this->coeff;
-    #     my @quot = ();
-    #     my $i    = $#rem - @den;
-    #     while (0 <= $i) {
-    #         my $q = pop(@rem);
-    #         if (defined $hd) {
-    #             $q /= $hd;
-    #         }
-    #         $quot[$i] = $q;
-    #         my $j = $i--;
-    #         foreach my $d (@den) {
-    #             $rem[$j++] -= $q * $d;
-    #         }
-    #     }
-    #     return (\@quot, \@rem);
-    # }
-
+    method divmod($that) {
+        my @den = $that.coefficients;
+        @den or fail 'division by zero polynomial';
+        my $hd = @den.pop;
+        if $that.is-monic {
+            $hd = Any;
+        }
+        my @rem = self.coefficients;
+        my @quot;
+        my $i = (@rem - 1) - @den;
+        while (0 <= $i) {
+            my $q = @rem.pop;
+            if $hd.defined {
+                $q /= $hd;
+            }
+            @quot[$i] = $q;
+            my $j = $i--;
+            for @den -> $d {
+                @rem[$j++] -= $q * $d;
+            }
+        }
+        return Math::Polynomial.new(@quot), Math::Polynomial.new(@rem);
+    }
 }

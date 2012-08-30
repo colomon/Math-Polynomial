@@ -192,36 +192,36 @@ ok(has_coeff($qq));                     # 0 * p
 # $qq = eval { $zp->mmod($zp) };
 # ok(!defined $qq);                       # not defined 0 mmod 0
 # ok($@ =~ /division by zero polynomial/);
-# 
-# my $rr;
-# ($qq, $rr) = $p->divmod($q);
-# ok(has_coeff($qq, 5));                  # p / q
-# ok(has_coeff($rr, 1));                  # p % q
-# ($qq, $rr) = $p->divmod($r);
-# ok(has_coeff($qq, 5/16, 5/8));          # p / r
-# ok(has_coeff($rr, 1/16));               # p % r
-# ($qq, $rr) = $p->divmod($mr);
-# ok(has_coeff($qq, 5/8, 5/4));           # p / mr
-# ok(has_coeff($rr, 1/16));               # p % mr
-# ($qq, $rr) = $p->divmod($c);
-# ok(has_coeff($qq, 0.5, 0, -2.5));       # p / c
-# ok(has_coeff($rr));                     # p % c
+
+my $rr;
+($qq, $rr) = $p.divmod($q);
+ok(has_coeff($qq, 5));                  # p / q
+ok(has_coeff($rr, 1));                  # p % q
+($qq, $rr) = $p.divmod($r);
+ok(has_coeff($qq, 5/16, 5/8));          # p / r
+ok(has_coeff($rr, 1/16));               # p % r
+($qq, $rr) = $p.divmod($mr);
+ok(has_coeff($qq, 5/8, 5/4));           # p / mr
+ok(has_coeff($rr, 1/16));               # p % mr
+($qq, $rr) = $p.divmod($c);
+ok(has_coeff($qq, 0.5, 0, -2.5));       # p / c
+ok(has_coeff($rr));                     # p % c
 # ($qq, $rr) = eval { $p->divmod($zp) };
 # ok(!defined $qq);                       # not defined p / 0
 # ok(!defined $rr);                       # not defined p % 0
 # ok($@ =~ /division by zero polynomial/);
-# ($qq, $rr) = $r->divmod($p);
-# ok(has_coeff($qq));                     # r / p
-# ok(has_coeff($rr, -1, 2));              # r % p
-# ($qq, $rr) = $r->divmod($s);
-# ok(has_coeff($qq, 4));                  # r / s
-# ok(has_coeff($rr, -3));                 # r % s
-# ($qq, $rr) = $c->divmod($p);
-# ok(has_coeff($qq));                     # c / p
-# ok(has_coeff($rr, -0.5));               # c % p
-# ($qq, $rr) = $zp->divmod($p);
-# ok(has_coeff($qq));                     # zp / p
-# ok(has_coeff($rr));                     # zp % p
+($qq, $rr) = $r.divmod($p);
+ok(has_coeff($qq));                     # r / p
+ok(has_coeff($rr, -1, 2));              # r % p
+($qq, $rr) = $r.divmod($s);
+ok(has_coeff($qq, 4));                  # r / s
+ok(has_coeff($rr, -3));                 # r % s
+($qq, $rr) = $c.divmod($p);
+ok(has_coeff($qq));                     # c / p
+ok(has_coeff($rr, -0.5));               # c % p
+($qq, $rr) = $zp.divmod($p);
+ok(has_coeff($qq));                     # zp / p
+ok(has_coeff($rr));                     # zp % p
 # ($qq, $rr) = eval { $zp->divmod($zp) };
 # ok(!defined $qq);                       # not defined 0 / 0
 # ok(!defined $rr);                       # not defined 0 % 0
