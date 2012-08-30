@@ -124,71 +124,71 @@ ok(has_coeff($qq));                     # p * 0
 $qq = $zp * $p;
 ok(has_coeff($qq));                     # 0 * p
 
-# $qq = $p / $q;
-# ok(has_coeff($qq, 5));                  # p / q
-# $qq = $p / $r;
-# ok(has_coeff($qq, 5/16, 5/8));          # p / r
-# $qq = $p / $mr;
-# ok(has_coeff($qq, 5/8, 5/4));           # p / mr
-# $qq = $p / $c;
-# ok(has_coeff($qq, 0.5, 0, -2.5));       # p / c
+$qq = $p / $q;
+ok(has_coeff($qq, 5));                  # p / q
+$qq = $p / $r;
+ok(has_coeff($qq, 5/16, 5/8));          # p / r
+$qq = $p / $mr;
+ok(has_coeff($qq, 5/8, 5/4));           # p / mr
+$qq = $p / $c;
+ok(has_coeff($qq, 0.5, 0, -2.5));       # p / c
 # $qq = eval { $p / $zp };
 # ok(!defined $qq);                       # not defined p / 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = $r / $p;
-# ok(has_coeff($qq));                     # r / p
-# $qq = $r / $s;
-# ok(has_coeff($qq, 4));                  # r / s
-# $qq = $c / $p;
-# ok(has_coeff($qq));                     # c / p
-# $qq = $zp / $p;
-# ok(has_coeff($qq));                     # zp / p
+$qq = $r / $p;
+ok(has_coeff($qq));                     # r / p
+$qq = $r / $s;
+ok(has_coeff($qq, 4));                  # r / s
+$qq = $c / $p;
+ok(has_coeff($qq));                     # c / p
+$qq = $zp / $p;
+ok(has_coeff($qq));                     # zp / p
 # $qq = eval { $zp / $zp };
 # ok(!defined $qq);                       # not defined 0 / 0
 # ok($@ =~ /division by zero polynomial/);
 # 
-# $qq = $p % $q;
-# ok(has_coeff($qq, 1));                  # p % q
-# $qq = $p % $r;
-# ok(has_coeff($qq, 1/16));               # p % r
-# $qq = $p % $mr;
-# ok(has_coeff($qq, 1/16));               # p % mr
-# $qq = $p % $c;
-# ok(has_coeff($qq));                     # p % c
+$qq = $p % $q;
+ok(has_coeff($qq, 1));                  # p % q
+$qq = $p % $r;
+ok(has_coeff($qq, 1/16));               # p % r
+$qq = $p % $mr;
+ok(has_coeff($qq, 1/16));               # p % mr
+$qq = $p % $c;
+ok(has_coeff($qq));                     # p % c
 # $qq = eval { $p % $zp };
 # ok(!defined $qq);                       # not defined p % 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = $r % $p;
-# ok(has_coeff($qq, -1, 2));              # r % p
-# $qq = $r % $s;
-# ok(has_coeff($qq, -3));                 # r % s
-# $qq = $c % $p;
-# ok(has_coeff($qq, -0.5));               # c % p
-# $qq = $zp % $p;
-# ok(has_coeff($qq));                     # zp % p
+$qq = $r % $p;
+ok(has_coeff($qq, -1, 2));              # r % p
+$qq = $r % $s;
+ok(has_coeff($qq, -3));                 # r % s
+$qq = $c % $p;
+ok(has_coeff($qq, -0.5));               # c % p
+$qq = $zp % $p;
+ok(has_coeff($qq));                     # zp % p
 # $qq = eval { $zp % $zp };
 # ok(!defined $qq);                       # not defined 0 % 0
 # ok($@ =~ /division by zero polynomial/);
-# 
-# $qq = $p->mmod($q);
-# ok(has_coeff($qq, 0.25));               # p mmod q
-# $qq = $p->mmod($r);
-# ok(has_coeff($qq, 0.25));               # p mmod r
-# $qq = $p->mmod($mr);
-# ok(has_coeff($qq, 1/16));               # p mmod mr
-# $qq = $p->mmod($c);
-# ok(has_coeff($qq));                     # p mmod c
+
+$qq = $p.mmod($q);
+ok(has_coeff($qq, 0.25));               # p mmod q
+$qq = $p.mmod($r);
+ok(has_coeff($qq, 0.25));               # p mmod r
+$qq = $p.mmod($mr);
+ok(has_coeff($qq, 1/16));               # p mmod mr
+$qq = $p.mmod($c);
+ok(has_coeff($qq));                     # p mmod c
 # $qq = eval { $p->mmod($zp) };
 # ok(!defined $qq);                       # not defined p mmod 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = $r->mmod($p);
-# ok(has_coeff($qq, -1, 2));              # r mmod p
-# $qq = $r->mmod($s);
-# ok(has_coeff($qq, -1.5));               # r mmod s
-# $qq = $c->mmod($p);
-# ok(has_coeff($qq, -0.5));               # c mmod p
-# $qq = $zp->mmod($p);
-# ok(has_coeff($qq));                     # zp mmod p
+$qq = $r.mmod($p);
+ok(has_coeff($qq, -1, 2));              # r mmod p
+$qq = $r.mmod($s);
+ok(has_coeff($qq, -1.5));               # r mmod s
+$qq = $c.mmod($p);
+ok(has_coeff($qq, -0.5));               # c mmod p
+$qq = $zp.mmod($p);
+ok(has_coeff($qq));                     # zp mmod p
 # $qq = eval { $zp->mmod($zp) };
 # ok(!defined $qq);                       # not defined 0 mmod 0
 # ok($@ =~ /division by zero polynomial/);
@@ -226,41 +226,35 @@ ok(has_coeff($rr));                     # zp % p
 # ok(!defined $qq);                       # not defined 0 / 0
 # ok(!defined $rr);                       # not defined 0 % 0
 # ok($@ =~ /division by zero polynomial/);
-# 
-# $qq = $p->add_const(0);
-# ok(has_coeff($qq, -0.25, 0, 1.25));     # p + 0
-# $qq = $p->add_const(1);
-# ok(has_coeff($qq, 0.75, 0, 1.25));      # p + 1
-# $qq = eval { $p + 1 };
-# ok(has_coeff($qq, 0.75, 0, 1.25));      # p + 1
-# $qq = eval { 1 + $p };
-# ok(has_coeff($qq, 0.75, 0, 1.25));      # 1 + p
-# 
-# $qq = $p->sub_const(0);
-# ok(has_coeff($qq, -0.25, 0, 1.25));     # p - 0
-# $qq = $p->sub_const(1);
-# ok(has_coeff($qq, -1.25, 0, 1.25));     # p - 1
-# $qq = eval { $p - 1 };
-# ok(has_coeff($qq, -1.25, 0, 1.25));     # p - 1
-# $qq = eval { 1 - $p };
-# ok(has_coeff($qq, 1.25, 0, -1.25));     # 1 - p
-# $qq = $zp->sub_const(1);
-# ok(has_coeff($qq, -1));                 # 0 - 1
-# 
-# $qq = $p->mul_const(0);
-# ok(has_coeff($qq));                     # p * 0
-# $qq = $p->mul_const(1);
-# ok(has_coeff($qq, -0.25, 0, 1.25));     # p * 1
-# $qq = $p->mul_const(2);
-# ok(has_coeff($qq, -0.5, 0, 2.5));       # p * 2
-# 
+
+$qq = $p + 0;
+ok(has_coeff($qq, -0.25, 0, 1.25));     # p + 0
+$qq = $p + 1;
+ok(has_coeff($qq, 0.75, 0, 1.25));      # p + 1
+$qq = 1 + $p;
+ok(has_coeff($qq, 0.75, 0, 1.25));      # 1 + p
+
+$qq = $p - 0;
+ok(has_coeff($qq, -0.25, 0, 1.25));     # p - 0
+$qq = $p - 1;
+ok(has_coeff($qq, -1.25, 0, 1.25));     # p - 1
+$qq = 1 - $p;
+ok(has_coeff($qq, 1.25, 0, -1.25));     # 1 - p
+
+$qq = $p * 0;
+ok(has_coeff($qq));                     # p * 0
+$qq = $p * 1;
+ok(has_coeff($qq, -0.25, 0, 1.25));     # p * 1
+$qq = $p * 2;
+ok(has_coeff($qq, -0.5, 0, 2.5));       # p * 2
+
 # $qq = eval { $p->div_const(0) };
 # ok(!defined $qq);                       # not defined p / 0
 # ok($@ =~ /division by zero/);
-# $qq = $p->div_const(1);
-# ok(has_coeff($qq, -0.25, 0, 1.25));     # p / 1
-# $qq = $p->div_const(2);
-# ok(has_coeff($qq, -1/8, 0, 5/8));       # p / 2
+$qq = $p / 1;
+ok(has_coeff($qq, -0.25, 0, 1.25));     # p / 1
+$qq = $p / 2;
+ok(has_coeff($qq, -1/8, 0, 5/8));       # p / 2
 
 $qq = $p ** 0;
 ok(has_coeff($qq, 1));                  # p ** 0

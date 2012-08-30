@@ -140,4 +140,34 @@ class Math::Polynomial {
         }
         return Math::Polynomial.new(@quot), Math::Polynomial.new(@rem);
     }
+
+    multi sub infix:</>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT) {
+        $a.divmod($b)[0];
+    }
+
+    multi sub infix:<%>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT) {
+        $a.divmod($b)[1];
+    }
+
+    method mmod($that) {
+        my @den  = $that.coefficients;
+        @den or fail 'division by zero polynomial';
+        my $hd = @den.pop;
+        if $that.is-monic {
+            $hd = Any;
+        }
+        my @rem = self.coefficients;
+        my $i = (@rem - 1) - @den;
+        while (0 <= $i) {
+            my $q = @rem.pop;
+            if $hd.defined {
+                @rem = @rem »*» $hd;
+            }
+            my $j = $i--;
+            for @den -> $d {
+                @rem[$j++] -= $q * $d;
+            }
+        }
+        return Math::Polynomial.new(@rem);
+    }
 }
