@@ -2,6 +2,8 @@ use v6;
 
 class Math::Polynomial {
     has @.coefficients;
+    has $.coeff_zero = 0;
+    has $.coeff_one = 1;
 
     multi method new (*@coefficients) {
         self.new(@coefficients);
@@ -117,7 +119,7 @@ class Math::Polynomial {
                 !! ($a xx $b).reduce(* * *);
     }
 
-    method divmod($that) {
+    method divmod(Math::Polynomial $that) {
         my @den = $that.coefficients;
         @den or fail 'division by zero polynomial';
         my $hd = @den.pop;
@@ -149,7 +151,7 @@ class Math::Polynomial {
         $a.divmod($b)[1];
     }
 
-    method mmod($that) {
+    method mmod(Math::Polynomial $that) {
         my @den  = $that.coefficients;
         @den or fail 'division by zero polynomial';
         my $hd = @den.pop;
@@ -170,4 +172,22 @@ class Math::Polynomial {
         }
         return Math::Polynomial.new(@rem);
     }
+
+    method pow_mod(Int $exp is copy where $exp >= 0, Math::Polynomial $that) {
+        my $this = self % $that;
+        return $this.new                                if 0 == $that.degree;
+        return $this.new($this.coeff_one)               if 0 == $exp;
+        return $this                                    if $this.is-zero;
+        return $this.new($this.coefficients[0] ** $exp) if 0 == $this.degree;
+        my $result = Any;
+        while $exp {
+            say :$exp.perl;
+            if 1 & $exp {
+                $result = $result.defined ?? ($this * $result) % $that !! $this;
+            }
+            $exp +>= 1 and $this = ($this * $this) % $that;
+        }
+        return $result;
+    }
+
 }
