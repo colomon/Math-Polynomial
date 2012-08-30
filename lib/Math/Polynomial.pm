@@ -25,6 +25,8 @@ class Math::Polynomial {
         "Math::Polynomial.new(" ~ @.coefficients».perl.join(', ') ~ ")";
     }
 
+    method Bool() { self.is-nonzero }
+
     method evaluate($x) {
         @.coefficients.reverse.reduce({ $^a * $x + $^b });
     }

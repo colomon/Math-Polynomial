@@ -16,8 +16,11 @@ use Math::Polynomial;
 sub has_coeff($p, *@desired-coefficients) {
     unless $p ~~ Math::Polynomial {
         say "# expected Math::Polynomial object, got { $p.WHAT }";
-        return 0;
+        return False;
     }
+
+    return True if @desired-coefficients == 0 && $p.is-zero; # special case while we figure out what to do
+
     my @coeff = $p.coefficients;
     if @coeff != @desired-coefficients || any(@coeff Z!= @desired-coefficients) {
         say '# expected coefficients (',
@@ -25,9 +28,9 @@ sub has_coeff($p, *@desired-coefficients) {
             '), got (',
             @coeff.join(", "),
             ")";
-        return 0;
+        return False;
     }
-    return 1;
+    return True;
 }
 
 my $p = Math::Polynomial.new(-0.25, 0, 1.25);
@@ -38,31 +41,25 @@ my $s = $p.new(0.5, 0.5);
 my $c = $p.new(-0.5);
 my $zp = $p.new;
 
-my $bool = !$p;
-ok(!$bool);             # !p is false
-ok(defined $bool);      # !p is defined
+nok !$p;              # !p is false
+nok !$c;              # !c is false
 
-$bool = !$c;
-ok(!$bool);             # !c is false
-ok(defined $bool);      # !c is defined
+ok $zp.degree < 0;    # zp is the zero polynomial
+ok !$zp;              # !zp is true
 
-ok($zp.degree < 0);     # zp is the zero polynomial
-$bool = !$zp;
-ok($bool);              # !zp is true
+my $bool = False;
+while $p {
+    $bool = True;
+    last;
+}
+ok $bool;              # p is true;
 
-# $bool = 0;
-# while ($p) {
-#     $bool = 1;
-#     last;
-# }
-# ok($bool);              # p is true;
-# 
-# $bool = 1;
-# while ($zp) {
-#     $bool = 0;
-#     last;
-# }
-# ok($bool);              # zp is false;
+$bool = True;
+while $zp {
+    $bool = False;
+    last;
+}
+ok $bool;              # zp is false;
 
 ok(!$p.is-zero);
 ok($p.is-nonzero);
