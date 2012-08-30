@@ -35,6 +35,12 @@ class Math::Polynomial {
 
     method is-zero() { @.coefficients == 1 && @.coefficients[0] == 0 }
     method is-nonzero() { !self.is-zero; }
+    method is-monic() { self.coefficients > 0 && self.coefficients[*-1] == 1 }
+
+    method monize() {
+        return self if self.is-zero || self.is-monic;
+        return self / self.coefficients[*-1];
+    }
 
     multi sub infix:<==>(Math::Polynomial $a, Math::Polynomial $b) is export(:DEFAULT) {
         my $max =   $a.coefficients.elems
@@ -110,4 +116,29 @@ class Math::Polynomial {
         $b == 0 ?? Math::Polynomial.new(1)
                 !! ($a xx $b).reduce(* * *);
     }
+
+    # sub _divmod($this, $that) {
+    #     my @den  = $that.coefficients;
+    #     @den or croak 'division by zero polynomial';
+    #     my $hd   = pop @den;
+    #     if ($that->is_monic) {
+    #         undef $hd;
+    #     }
+    #     my @rem  = $this->coeff;
+    #     my @quot = ();
+    #     my $i    = $#rem - @den;
+    #     while (0 <= $i) {
+    #         my $q = pop(@rem);
+    #         if (defined $hd) {
+    #             $q /= $hd;
+    #         }
+    #         $quot[$i] = $q;
+    #         my $j = $i--;
+    #         foreach my $d (@den) {
+    #             $rem[$j++] -= $q * $d;
+    #         }
+    #     }
+    #     return (\@quot, \@rem);
+    # }
+
 }

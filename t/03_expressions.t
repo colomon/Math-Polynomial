@@ -396,43 +396,39 @@ ok(has_coeff($qq));                     # 0 ** 3
 # ok(has_coeff($qq, -0.25));              # q(0)
 # $qq = $zp->nest($p);
 # ok(has_coeff($qq));                     # 0(p)
-# 
-# $bool = $q->is_monic;
-# ok(!$bool);                             # q is not monic
-# $pp = $q->monize;
-# ok(has_coeff($pp, -1, 0, 1));           # monize q
-# $bool = $pp->is_monic;
-# ok($bool);                              # x**2-1 is monic
-# $qq = $pp->monize;
-# ok($qq == $pp);                         # monize monic pp
-# $qq = $c->monize;
-# ok(has_coeff($qq, 1));                  # monize c
-# $qq = eval { $zp->monize };
-# ok(has_coeff($qq));                     # monize 0
-# $bool = $zp->is_monic;
-# ok(defined $bool);                      # is_monic defined for zp
-# ok(!$bool);                             # zp is not monic
-# 
-# # assignment operators
-# 
-# $pp = Math::Polynomial->new(1, 10);
-# $qq = $pp;
-# $pp += $pp;
-# ok(has_coeff($pp, 2, 20));              # += working
-# ok(has_coeff($qq, 1, 10));              # += no side effects
-# 
-# $pp = $p && $q;
-# ok($pp == $q);                          # && operator long path
-# 
-# $pp = $zp && $q;
-# ok($pp == $zp);                         # && operator short path
-# 
-# $pp = $p || $q;
-# ok($pp == $p);                          # || operator short path
-# 
-# $pp = $zp || $q;
-# ok($pp == $q);                          # || operator long path
-# 
+
+nok $q.is-monic;                          # q is not monic
+$pp = $q.monize;
+ok(has_coeff($pp, -1, 0, 1));             # monize q
+ok $pp.is-monic;                          # x**2-1 is monic
+$qq = $pp.monize;
+ok($qq == $pp);                           # monize monic pp
+$qq = $c.monize;
+ok(has_coeff($qq, 1));                    # monize c
+$qq = $zp.monize;
+ok(has_coeff($qq));                       # monize 0
+nok $zp.is-monic;                         # zp is not monic
+
+# assignment operators
+
+$pp = Math::Polynomial.new(1, 10);
+$qq = $pp;
+$pp += $pp;
+ok(has_coeff($pp, 2, 20));              # += working
+ok(has_coeff($qq, 1, 10));              # += no side effects
+
+$pp = $p && $q;
+ok($pp == $q);                          # && operator long path
+
+$pp = $zp && $q;
+ok($pp == $zp);                         # && operator short path
+
+$pp = $p || $q;
+ok($pp == $p);                          # || operator short path
+
+$pp = $zp || $q;
+ok($pp == $q);                          # || operator long path
+
 # # diagnostics
 # 
 # ok(10_000 == $Math::Polynomial::max_degree);
