@@ -103,4 +103,9 @@ class Math::Polynomial {
     multi sub infix:</>(Math::Polynomial $a, $b) is export(:DEFAULT) {
         $a.new($a.coefficients »/» $b);
     }
+
+    multi sub infix:<**>(Math::Polynomial $a, Int $b where $b >= 0) is export(:DEFAULT) {
+        $b == 0 ?? Math::Polynomial.new(1)
+                !! ($a xx $b).reduce(* * *);
+    }
 }

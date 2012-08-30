@@ -264,31 +264,31 @@ ok(has_coeff($qq));                     # 0 * p
 # ok(has_coeff($qq, -0.25, 0, 1.25));     # p / 1
 # $qq = $p->div_const(2);
 # ok(has_coeff($qq, -1/8, 0, 5/8));       # p / 2
-# 
-# $qq = $p ** 0;
-# ok(has_coeff($qq, 1));                  # p ** 0
-# $qq = $p ** 1;
-# ok(has_coeff($qq, -0.25, 0, 1.25));     # p ** 1
-# $qq = $p ** 2;
-# ok(has_coeff($qq, 1/16, 0, -5/8, 0, 25/16));    # p ** 2
-# $qq = $p ** 3;
-# ok(has_coeff($qq, -1/64, 0, 15/64, 0, -75/64, 0, 125/64));      # p ** 3
-# $qq = $c ** 0;
-# ok(has_coeff($qq, 1));                  # c ** 0
-# $qq = $c ** 1;
-# ok(has_coeff($qq, -0.5));               # c ** 1
-# $qq = $c ** 2;
-# ok(has_coeff($qq, 0.25));               # c ** 2
-# $qq = $c ** 3;
-# ok(has_coeff($qq, -1/8));               # c ** 3
-# $qq = $zp ** 0;
-# ok(has_coeff($qq, 1));                  # 0 ** 0
-# $qq = $zp ** 1;
-# ok(has_coeff($qq));                     # 0 ** 1
-# $qq = $zp ** 2;
-# ok(has_coeff($qq));                     # 0 ** 2
-# $qq = $zp ** 3;
-# ok(has_coeff($qq));                     # 0 ** 3
+
+$qq = $p ** 0;
+ok(has_coeff($qq, 1));                  # p ** 0
+$qq = $p ** 1;
+ok(has_coeff($qq, -0.25, 0, 1.25));     # p ** 1
+$qq = $p ** 2;
+ok(has_coeff($qq, 1/16, 0, -5/8, 0, 25/16));    # p ** 2
+$qq = $p ** 3;
+ok(has_coeff($qq, -1/64, 0, 15/64, 0, -75/64, 0, 125/64));      # p ** 3
+$qq = $c ** 0;
+ok(has_coeff($qq, 1));                  # c ** 0
+$qq = $c ** 1;
+ok(has_coeff($qq, -0.5));               # c ** 1
+$qq = $c ** 2;
+ok(has_coeff($qq, 0.25));               # c ** 2
+$qq = $c ** 3;
+ok(has_coeff($qq, -1/8));               # c ** 3
+$qq = $zp ** 0;
+ok(has_coeff($qq, 1));                  # 0 ** 0
+$qq = $zp ** 1;
+ok(has_coeff($qq));                     # 0 ** 1
+$qq = $zp ** 2;
+ok(has_coeff($qq));                     # 0 ** 2
+$qq = $zp ** 3;
+ok(has_coeff($qq));                     # 0 ** 3
 # $qq = eval { 3 ** $p };
 # ok(!defined $qq);                       # not defined 3 ** p
 # ok($@ =~ /wrong operand type/);
