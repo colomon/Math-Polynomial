@@ -370,26 +370,26 @@ ok(has_coeff($qq));                     # 0 ** 2 % q
 # ok(has_coeff($qq));                     # 0 >> 0
 # $qq = $zp >> 0;
 # ok(has_coeff($qq));                     # 0 >> 0
-# 
-# $pp = $p->new(11, 22, 33, 44, 55);
-# my $ok = 1;
-# foreach my $w (0..6) {
-#     foreach my $b (0..6) {
-#         my @c = grep {defined $_} (11, 22, 33, 44, 55)[$b..$b+$w-1];
-#         $qq = $pp->slice($b, $w);
-#         $ok ||= has_coeff($qq, @c);
-#     }
-# }
-# ok($ok);                                # slice
-# 
-# $qq = $p->nest($q);
-# ok(has_coeff($qq, -11/64, 0, -5/32, 0, 5/64));  # p(q)
-# $qq = $q->nest($p);
-# ok(has_coeff($qq, -15/64, 0, -5/32, 0, 25/64)); # q(p)
-# $qq = $p->nest($zp);
-# ok(has_coeff($qq, -0.25));              # q(0)
-# $qq = $zp->nest($p);
-# ok(has_coeff($qq));                     # 0(p)
+
+$pp = $p.new(11, 22, 33, 44, 55);
+my $ok = True;
+for ^7 -> $w {
+    for ^7 -> $b {
+        my @c = grep *.defined, (11, 22, 33, 44, 55)[$b..$b+$w-1];
+        $qq = $pp.slice($b, $w);
+        $ok ||= has_coeff($qq, @c);
+    }
+}
+ok $ok;                                # slice
+
+$qq = $p.nest($q);
+ok(has_coeff($qq, -11/64, 0, -5/32, 0, 5/64));  # p(q)
+$qq = $q.nest($p);
+ok(has_coeff($qq, -15/64, 0, -5/32, 0, 25/64)); # q(p)
+$qq = $p.nest($zp);
+ok(has_coeff($qq, -0.25));              # q(0)
+$qq = $zp.nest($p);
+ok(has_coeff($qq));                     # 0(p)
 
 nok $q.is-monic;                          # q is not monic
 $pp = $q.monize;

@@ -189,4 +189,23 @@ class Math::Polynomial {
         return $result;
     }
 
+    method slice(Int $start where { $start >= 0 },
+                 Int $count where { $count >= 0 }) {
+        my $degree = self.degree;
+        my $end = $start + $count - 1;
+        if $degree <= $end {
+            return self if 0 == $start;
+            $end = $degree;
+        }
+        return self.new(self.coefficients()[$start .. $end]);
+    }
+
+    method nest(Math::Polynomial $that) {
+        my $i = self.degree;
+        my $result = $that.new(0 <= $i ?? self.coefficients()[$i] !! ());
+        while (0 <= --$i) {
+            $result = $result * $that + self.coefficients()[$i];
+        }
+        return $result;
+    }
 }
