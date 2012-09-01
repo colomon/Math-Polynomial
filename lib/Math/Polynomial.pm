@@ -217,6 +217,47 @@ class Math::Polynomial {
         return $result;
     }
 
+    method mul-root($root) {
+        return self.shift-up(1) - self * $root;
+    }
+
+    method monomial(Int $degree where { $degree >= 0 }, $coeff? is copy) {
+        my $zero;
+        # croak 'exponent too large'
+        #     if defined($max_degree) && $degree > $max_degree;
+        if self.defined {
+            if !$coeff.defined {
+                $coeff = self.coeff_one;
+            }
+            $zero  = self.coeff_zero;
+        }
+        else {
+            if !$coeff.defined {
+                $coeff = 1;
+            }
+            $zero  = $coeff - $coeff;
+        }
+        return self.new($zero xx $degree, $coeff);
+    }
+
+    method interpolate(@xvalues, @yvalues where { @yvalues == @xvalues }) {
+        return self.new unless @xvalues;
+        my @alpha  = @yvalues;
+        my $result = self.new(@alpha[0]);
+        my $aux    = $result.monomial(0);
+        my $zero   = $result.coeff_zero;
+        for 1..^@alpha -> $k {
+            for ($k..^@alpha).reverse -> $j {
+                my $dx = @xvalues[$j] - @xvalues[$j-$k];
+                fail 'x values not disjoint' if $zero == $dx;
+                @alpha[$j] = (@alpha[$j] - @alpha[$j-1]) / $dx;
+            }
+            $aux = $aux.mul-root(@xvalues[$k-1]);
+            $result += $aux * @alpha[$k];
+        }
+        return $result;
+    }
+
     method differentiate() {
         self.new((1..self.degree).map({ self.coefficients[$_] * $_ }));
     }
