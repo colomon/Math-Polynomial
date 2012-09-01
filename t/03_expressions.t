@@ -348,28 +348,28 @@ ok(has_coeff($qq));                     # 0 ** 2 % q
 # $qq = eval { $zp->pow_mod(2, $zp) };
 # ok(!defined $qq);                       # not defined 0 ** 2 % 0
 # ok($@ =~ /division by zero polynomial/);
-# 
-# $qq = $p << 3;
-# ok(has_coeff($qq, 0, 0, 0, -0.25, 0, 1.25));    # p << 3
-# $qq = $c << 3;
-# ok(has_coeff($qq, 0, 0, 0, -0.5));      # c << 3
-# $qq = $zp << 3;
-# ok(has_coeff($qq));                     # 0 << 3
-# $qq = $p << 0;
-# ok(has_coeff($qq, -0.25, 0, 1.25));     # p << 0
-# $qq = $zp << 0;
-# ok(has_coeff($qq));                     # 0 << 0
-# 
-# $qq = $p >> 3;
-# ok(has_coeff($qq));                     # p >> 3
-# $qq = $p >> 2;
-# ok(has_coeff($qq, 1.25));               # p >> 2
-# $qq = $p >> 0;
-# ok(has_coeff($qq, -0.25, 0, 1.25));     # p >> 0
-# $qq = $zp >> 2;
-# ok(has_coeff($qq));                     # 0 >> 0
-# $qq = $zp >> 0;
-# ok(has_coeff($qq));                     # 0 >> 0
+
+$qq = $p.shift-up(3);
+ok(has_coeff($qq, 0, 0, 0, -0.25, 0, 1.25));    # p << 3
+$qq = $c.shift-up(3);
+ok(has_coeff($qq, 0, 0, 0, -0.5));      # c << 3
+$qq = $zp.shift-up(3);
+ok(has_coeff($qq));                     # 0 << 3
+$qq = $p.shift-up(0);
+ok(has_coeff($qq, -0.25, 0, 1.25));     # p << 0
+$qq = $zp.shift-up(0);
+ok(has_coeff($qq));                     # 0 << 0
+
+$qq = $p.shift-down(3);
+ok(has_coeff($qq));                     # p >> 3
+$qq = $p.shift-down(2);
+ok(has_coeff($qq, 1.25));               # p >> 2
+$qq = $p.shift-down(0);
+ok(has_coeff($qq, -0.25, 0, 1.25));     # p >> 0
+$qq = $zp.shift-down(2);
+ok(has_coeff($qq));                     # 0 >> 2
+$qq = $zp.shift-down(0);
+ok(has_coeff($qq));                     # 0 >> 0
 
 $pp = $p.new(11, 22, 33, 44, 55);
 my $ok = True;

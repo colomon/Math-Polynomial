@@ -189,6 +189,14 @@ class Math::Polynomial {
         return $result;
     }
 
+    method shift-up(Int $n where { $n >= 0 }) {
+        Math::Polynomial.new(0 xx $n, self.coefficients);
+    }
+
+    method shift-down(Int $n where { $n >= 0}) {
+        Math::Polynomial.new(self.coefficients()[$n .. *-1]);
+    }
+
     method slice(Int $start where { $start >= 0 },
                  Int $count where { $count >= 0 }) {
         my $degree = self.degree;
