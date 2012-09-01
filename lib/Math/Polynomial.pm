@@ -10,11 +10,9 @@ class Math::Polynomial {
     }
 
     multi method new (@x is copy) {
-        while @x > 1 && @x[*-1].abs < 1e-13 {
+        while @x && @x[*-1].abs < 1e-13 {
             @x.pop;
         }
-
-        @x.push(0) if @x.elems == 0;
 
         self.bless(*, coefficients => @x);
     }
@@ -30,12 +28,12 @@ class Math::Polynomial {
     method Bool() { self.is-nonzero }
 
     method evaluate($x) {
-        @.coefficients.reverse.reduce({ $^a * $x + $^b });
+        @.coefficients ?? @.coefficients.reverse.reduce({ $^a * $x + $^b }) !! self.coeff_zero;
     }
 
     method degree() { self.is-nonzero ?? @.coefficients - 1 !! -Inf }
 
-    method is-zero() { @.coefficients == 1 && @.coefficients[0] == 0 }
+    method is-zero() { @.coefficients == 0 || (@.coefficients == 1 && @.coefficients[0] == 0) }
     method is-nonzero() { !self.is-zero; }
     method is-monic() { self.coefficients > 0 && self.coefficients[*-1] == 1 }
 
