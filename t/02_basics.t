@@ -69,19 +69,14 @@ for @samples -> $sample {
     is $p.coefficients, @res, '$p has the proper coefficients';
 }
 
-# ok(0 == $sp.coefficients()[-1]);
-
-ok(0 == $sp.coeff_zero);
-ok(1 == $sp.coeff_one);
+ok(0 == $sp.coeff-zero);
+ok(1 == $sp.coeff-one);
 ok(2 == $sp.degree);
-# ok(2 == $sp.proper_degree);
 
 my $zp = $sp.new;
-ok(0 == $zp.coeff_zero);
-ok(1 == $zp.coeff_one);
+ok(0 == $zp.coeff-zero);
+ok(1 == $zp.coeff-one);
 ok -Inf == $zp.degree;
-# my @res = $zp.proper_degree;
-# ok(1 == @res && !defined @res[0]);      # zero polynomial / proper_degree
  
 $sp = $sp.new(-1, -2, 1);
 @samples = (

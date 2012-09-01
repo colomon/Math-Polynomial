@@ -290,62 +290,62 @@ ok(has_coeff($qq));                     # 0 ** 3
 # ok(!defined $qq);                       # not defined p ** p
 # ok($@ =~ /non-negative integer argument expected/);
 
-$qq = $p.pow_mod(0, $q);
+$qq = $p.pow-mod(0, $q);
 ok(has_coeff($qq, 1));                  # p ** 0 % q
-$qq = $p.pow_mod(1, $q);
+$qq = $p.pow-mod(1, $q);
 ok(has_coeff($qq, 1));                  # p ** 1 % q
-$qq = $p.pow_mod(2, $q);
+$qq = $p.pow-mod(2, $q);
 ok(has_coeff($qq, 1));                  # p ** 2 % q
-$qq = $p.pow_mod(3, $q);
+$qq = $p.pow-mod(3, $q);
 ok(has_coeff($qq, 1));                  # p ** 3 % q
-$qq = $p.pow_mod(0, $r);
+$qq = $p.pow-mod(0, $r);
 ok(has_coeff($qq, 1));                  # p ** 0 % r
-$qq = $p.pow_mod(1, $r);
+$qq = $p.pow-mod(1, $r);
 ok(has_coeff($qq, 1/16));               # p ** 1 % r
-$qq = $p.pow_mod(2, $r);
+$qq = $p.pow-mod(2, $r);
 ok(has_coeff($qq, 1/256));              # p ** 2 % r
-$qq = $p.pow_mod(0, $c);
+$qq = $p.pow-mod(0, $c);
 ok(has_coeff($qq));                     # p ** 0 % c
-$qq = $p.pow_mod(1, $c);
+$qq = $p.pow-mod(1, $c);
 ok(has_coeff($qq));                     # p ** 1 % c
-$qq = $p.pow_mod(2, $c);
+$qq = $p.pow-mod(2, $c);
 ok(has_coeff($qq));                     # p ** 2 % c
-# $qq = eval { $p->pow_mod(0, $zp) };
+# $qq = eval { $p->pow-mod(0, $zp) };
 # ok(!defined $qq);                       # not defined p ** 0 % 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = eval { $p->pow_mod(1, $zp) };
+# $qq = eval { $p->pow-mod(1, $zp) };
 # ok(!defined $qq);                       # not defined p ** 1 % 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = eval { $p->pow_mod(2, $zp) };
+# $qq = eval { $p->pow-mod(2, $zp) };
 # ok(!defined $qq);                       # not defined p ** 2 % 0
 # ok($@ =~ /division by zero polynomial/);
-$qq = $r.pow_mod(0, $q);
+$qq = $r.pow-mod(0, $q);
 ok(has_coeff($qq, 1));                  # r ** 0 % q
-$qq = $r.pow_mod(1, $q);
+$qq = $r.pow-mod(1, $q);
 ok(has_coeff($qq, -1, 2));              # r ** 1 % q
-$qq = $r.pow_mod(2, $q);
+$qq = $r.pow-mod(2, $q);
 ok(has_coeff($qq, 5, -4));              # r ** 2 % q
-$qq = $r.pow_mod(3, $q);
+$qq = $r.pow-mod(3, $q);
 ok(has_coeff($qq, -13, 14));            # r ** 3 % q
-$qq = $c.pow_mod(0, $q);
+$qq = $c.pow-mod(0, $q);
 ok(has_coeff($qq, 1));                  # c ** 0 % q
-$qq = $c.pow_mod(1, $q);
+$qq = $c.pow-mod(1, $q);
 ok(has_coeff($qq, -0.5));               # c ** 1 % q
-$qq = $c.pow_mod(2, $q);
+$qq = $c.pow-mod(2, $q);
 ok(has_coeff($qq, 0.25));               # c ** 2 % q
-$qq = $zp.pow_mod(0, $q);
+$qq = $zp.pow-mod(0, $q);
 ok(has_coeff($qq, 1));                  # 0 ** 0 % q
-$qq = $zp.pow_mod(1, $q);
+$qq = $zp.pow-mod(1, $q);
 ok(has_coeff($qq));                     # 0 ** 1 % q
-$qq = $zp.pow_mod(2, $q);
+$qq = $zp.pow-mod(2, $q);
 ok(has_coeff($qq));                     # 0 ** 2 % q
-# $qq = eval { $zp->pow_mod(0, $zp) };
+# $qq = eval { $zp->pow-mod(0, $zp) };
 # ok(!defined $qq);                       # not defined 0 ** 0 % 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = eval { $zp->pow_mod(1, $zp) };
+# $qq = eval { $zp->pow-mod(1, $zp) };
 # ok(!defined $qq);                       # not defined 0 ** 1 % 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = eval { $zp->pow_mod(2, $zp) };
+# $qq = eval { $zp->pow-mod(2, $zp) };
 # ok(!defined $qq);                       # not defined 0 ** 2 % 0
 # ok($@ =~ /division by zero polynomial/);
 

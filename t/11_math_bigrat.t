@@ -32,10 +32,10 @@ my $q = $p.interpolate([$x1, $x2, $x3], [$y1, $y2, $y3]);
 ok $p == $q;
 
 my $x = $p.monomial(1);
-my $y = $x - $p.coeff_one;
+my $y = $x - $p.coeff-one;
 isa_ok $y, Math::Polynomial, '$y is indeed a Math::Polynomial';
 ok 1 == $y.degree;
-ok $p.coeff_zero == $y.evaluate($x3);
+ok $p.coeff-zero == $y.evaluate($x3);
 
 # Seems like maybe there should be a test of the type of $y's coefficients here?
 

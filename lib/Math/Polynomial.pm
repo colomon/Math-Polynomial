@@ -2,8 +2,8 @@ use v6;
 
 class Math::Polynomial {
     has @.coefficients;
-    has $.coeff_zero = 0;
-    has $.coeff_one = 1;
+    has $.coeff-zero = 0;
+    has $.coeff-one = 1;
 
     multi method new (*@coefficients) {
         self.new(@coefficients);
@@ -28,7 +28,7 @@ class Math::Polynomial {
     method Bool() { self.is-nonzero }
 
     method evaluate($x) {
-        @.coefficients ?? @.coefficients.reverse.reduce({ $^a * $x + $^b }) !! self.coeff_zero;
+        @.coefficients ?? @.coefficients.reverse.reduce({ $^a * $x + $^b }) !! self.coeff-zero;
     }
 
     method degree() { self.is-nonzero ?? @.coefficients - 1 !! -Inf }
@@ -171,10 +171,10 @@ class Math::Polynomial {
         return Math::Polynomial.new(@rem);
     }
 
-    method pow_mod(Int $exp is copy where $exp >= 0, Math::Polynomial $that) {
+    method pow-mod(Int $exp is copy where $exp >= 0, Math::Polynomial $that) {
         my $this = self % $that;
         return $this.new                                if 0 == $that.degree;
-        return $this.new($this.coeff_one)               if 0 == $exp;
+        return $this.new($this.coeff-one)               if 0 == $exp;
         return $this                                    if $this.is-zero;
         return $this.new($this.coefficients[0] ** $exp) if 0 == $this.degree;
         my $result = Any;
@@ -225,9 +225,9 @@ class Math::Polynomial {
         #     if defined($max_degree) && $degree > $max_degree;
         if self.defined {
             if !$coeff.defined {
-                $coeff = self.coeff_one;
+                $coeff = self.coeff-one;
             }
-            $zero  = self.coeff_zero;
+            $zero  = self.coeff-zero;
         }
         else {
             if !$coeff.defined {
@@ -243,7 +243,7 @@ class Math::Polynomial {
         my @alpha  = @yvalues;
         my $result = self.new(@alpha[0]);
         my $aux    = $result.monomial(0);
-        my $zero   = $result.coeff_zero;
+        my $zero   = $result.coeff-zero;
         for 1..^@alpha -> $k {
             for ($k..^@alpha).reverse -> $j {
                 my $dx = @xvalues[$j] - @xvalues[$j-$k];
@@ -260,7 +260,7 @@ class Math::Polynomial {
         self.new((1..self.degree).map({ self.coefficients[$_] * $_ }));
     }
 
-    method integrate($const = self.coeff_zero) {
+    method integrate($const = self.coeff-zero) {
         self.new($const, (0..self.degree).map({ self.coefficients()[$_] / ($_+1) }));
     }
 
