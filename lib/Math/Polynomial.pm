@@ -216,4 +216,17 @@ class Math::Polynomial {
         }
         return $result;
     }
+
+    method differentiate() {
+        self.new((1..self.degree).map({ self.coefficients[$_] * $_ }));
+    }
+
+    method integrate($const = self.coeff_zero) {
+        self.new($const, (0..self.degree).map({ self.coefficients()[$_] / ($_+1) }));
+    }
+
+    method definite_integral($lower, $upper) {
+        my $ad = self.integrate;
+        return $ad.evaluate($upper) - $ad.evaluate($lower);
+    }    
 }
