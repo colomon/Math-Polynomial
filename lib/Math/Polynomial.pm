@@ -33,7 +33,7 @@ class Math::Polynomial {
         @.coefficients.reverse.reduce({ $^a * $x + $^b });
     }
 
-    method degree() { @.coefficients - 1 }
+    method degree() { self.is-nonzero ?? @.coefficients - 1 !! -Inf }
 
     method is-zero() { @.coefficients == 1 && @.coefficients[0] == 0 }
     method is-nonzero() { !self.is-zero; }

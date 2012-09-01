@@ -8,7 +8,7 @@
 
 use v6;
 use Test;
-plan 207;
+plan 150;
 use Math::Polynomial;
 
 #########################
