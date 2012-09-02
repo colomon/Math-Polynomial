@@ -308,4 +308,30 @@ class Math::Polynomial {
         fail 'division by zero polynomial' if $that.is-zero || $d2.is-zero;
         return $d2 / $d.coefficients()[*-1];
     }
+
+    method from-roots(*@roots) {
+        my $one = self.defined ?? self.coeff-one !! (@roots ?? @roots[*-1] ** 0 !! 1);
+        my $result = self.new($one);
+        for @roots -> $root {
+            $result = $result.mul-root($root);
+        }
+        return $result;
+    }
+
+    method divmod-root($root) {
+        my $i   = self.degree;
+        my $rem = $i >= 0 ?? self.coefficients()[$i] !! self.coeff-zero;
+        my @quot;
+        while 0 <= --$i {
+            @quot[$i] = $rem;
+            $rem = $root * $rem + self.coefficients()[$i];
+        }
+        return (self.new(@quot), self.new($rem));
+    }
+
+    method div-root($root) {
+        my ($quot, $rem) = self.divmod-root($root);
+        return $quot;
+    }
+
 }
