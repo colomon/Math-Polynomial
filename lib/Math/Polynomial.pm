@@ -267,5 +267,45 @@ class Math::Polynomial {
     method definite_integral($lower, $upper) {
         my $ad = self.integrate;
         return $ad.evaluate($upper) - $ad.evaluate($lower);
-    }    
+    }
+
+    method gcd(Math::Polynomial $that is copy, &mod = * % *) {
+        my $this = self;
+        my ($this_d, $that_d) = ($this.degree, $that.degree);
+        if $this_d < $that_d {
+            ($this, $that) = ($that, $this);
+            ($this_d, $that_d) = ($that_d, $this_d);
+        }
+        
+        while 0 <= $that_d {
+            ($this, $that) = ($that, &mod($this, $that));
+            ($this_d, $that_d) = ($that_d, $that.degree);
+            $this_d > $that_d or fail 'bad modulo operator';
+        }
+        return $this;
+    }
+
+    method xgcd(Math::Polynomial $that is copy) {
+        my $this = self;
+        my ($d1, $d2) = ($this.new($this.coeff-one), $this.new);
+        if $this.degree < $that.degree {
+            ($this, $that) = ($that, $this);
+            ($d1, $d2) = ($d2, $d1);
+        }
+
+        my ($m1, $m2) = ($d2, $d1);
+        while (!$that.is-zero) {
+            my ($div, $mod) = $this.divmod($that);
+            ($this, $that) = ($that, $mod);
+            ($d1, $d2, $m1, $m2) =
+                ($m1, $m2, $d1 - $m1 * $div, $d2 - $m2 * $div);
+        }
+        return ($this, $d1, $d2, $m1, $m2);
+    }
+
+    method inv-mod(Math::Polynomial $that) {
+        my ($d, $d2) = ($that.xgcd(self))[0, 2];
+        fail 'division by zero polynomial' if $that.is-zero || $d2.is-zero;
+        return $d2 / $d.coefficients()[*-1];
+    }
 }
