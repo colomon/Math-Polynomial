@@ -14,7 +14,7 @@ class Math::Polynomial {
             @x.pop;
         }
 
-        self.bless(*, coefficients => @x);
+        self.bless(coefficients => @x);
     }
 
     method Str() returns Str {
