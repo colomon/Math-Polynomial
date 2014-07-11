@@ -132,7 +132,7 @@ $qq = $p / $mr;
 ok(has_coeff($qq, 5/8, 5/4));           # p / mr
 $qq = $p / $c;
 ok(has_coeff($qq, 0.5, 0, -2.5));       # p / c
-# $qq = eval { $p / $zp };
+# $qq = EVAL { $p / $zp };
 # ok(!defined $qq);                       # not defined p / 0
 # ok($@ =~ /division by zero polynomial/);
 $qq = $r / $p;
@@ -143,7 +143,7 @@ $qq = $c / $p;
 ok(has_coeff($qq));                     # c / p
 $qq = $zp / $p;
 ok(has_coeff($qq));                     # zp / p
-# $qq = eval { $zp / $zp };
+# $qq = EVAL { $zp / $zp };
 # ok(!defined $qq);                       # not defined 0 / 0
 # ok($@ =~ /division by zero polynomial/);
 # 
@@ -155,7 +155,7 @@ $qq = $p % $mr;
 ok(has_coeff($qq, 1/16));               # p % mr
 $qq = $p % $c;
 ok(has_coeff($qq));                     # p % c
-# $qq = eval { $p % $zp };
+# $qq = EVAL { $p % $zp };
 # ok(!defined $qq);                       # not defined p % 0
 # ok($@ =~ /division by zero polynomial/);
 $qq = $r % $p;
@@ -166,7 +166,7 @@ $qq = $c % $p;
 ok(has_coeff($qq, -0.5));               # c % p
 $qq = $zp % $p;
 ok(has_coeff($qq));                     # zp % p
-# $qq = eval { $zp % $zp };
+# $qq = EVAL { $zp % $zp };
 # ok(!defined $qq);                       # not defined 0 % 0
 # ok($@ =~ /division by zero polynomial/);
 
@@ -178,7 +178,7 @@ $qq = $p.mmod($mr);
 ok(has_coeff($qq, 1/16));               # p mmod mr
 $qq = $p.mmod($c);
 ok(has_coeff($qq));                     # p mmod c
-# $qq = eval { $p->mmod($zp) };
+# $qq = EVAL { $p->mmod($zp) };
 # ok(!defined $qq);                       # not defined p mmod 0
 # ok($@ =~ /division by zero polynomial/);
 $qq = $r.mmod($p);
@@ -189,7 +189,7 @@ $qq = $c.mmod($p);
 ok(has_coeff($qq, -0.5));               # c mmod p
 $qq = $zp.mmod($p);
 ok(has_coeff($qq));                     # zp mmod p
-# $qq = eval { $zp->mmod($zp) };
+# $qq = EVAL { $zp->mmod($zp) };
 # ok(!defined $qq);                       # not defined 0 mmod 0
 # ok($@ =~ /division by zero polynomial/);
 
@@ -206,7 +206,7 @@ ok(has_coeff($rr, 1/16));               # p % mr
 ($qq, $rr) = $p.divmod($c);
 ok(has_coeff($qq, 0.5, 0, -2.5));       # p / c
 ok(has_coeff($rr));                     # p % c
-# ($qq, $rr) = eval { $p->divmod($zp) };
+# ($qq, $rr) = EVAL { $p->divmod($zp) };
 # ok(!defined $qq);                       # not defined p / 0
 # ok(!defined $rr);                       # not defined p % 0
 # ok($@ =~ /division by zero polynomial/);
@@ -222,7 +222,7 @@ ok(has_coeff($rr, -0.5));               # c % p
 ($qq, $rr) = $zp.divmod($p);
 ok(has_coeff($qq));                     # zp / p
 ok(has_coeff($rr));                     # zp % p
-# ($qq, $rr) = eval { $zp->divmod($zp) };
+# ($qq, $rr) = EVAL { $zp->divmod($zp) };
 # ok(!defined $qq);                       # not defined 0 / 0
 # ok(!defined $rr);                       # not defined 0 % 0
 # ok($@ =~ /division by zero polynomial/);
@@ -248,7 +248,7 @@ ok(has_coeff($qq, -0.25, 0, 1.25));     # p * 1
 $qq = $p * 2;
 ok(has_coeff($qq, -0.5, 0, 2.5));       # p * 2
 
-# $qq = eval { $p->div_const(0) };
+# $qq = EVAL { $p->div_const(0) };
 # ok(!defined $qq);                       # not defined p / 0
 # ok($@ =~ /division by zero/);
 $qq = $p / 1;
@@ -280,13 +280,13 @@ $qq = $zp ** 2;
 ok(has_coeff($qq));                     # 0 ** 2
 $qq = $zp ** 3;
 ok(has_coeff($qq));                     # 0 ** 3
-# $qq = eval { 3 ** $p };
+# $qq = EVAL { 3 ** $p };
 # ok(!defined $qq);                       # not defined 3 ** p
 # ok($@ =~ /wrong operand type/);
-# $qq = eval { $p ** 0.5 };
+# $qq = EVAL { $p ** 0.5 };
 # ok(!defined $qq);                       # not defined p ** 0.5
 # ok($@ =~ /non-negative integer argument expected/);
-# $qq = eval { $p ** $p };
+# $qq = EVAL { $p ** $p };
 # ok(!defined $qq);                       # not defined p ** p
 # ok($@ =~ /non-negative integer argument expected/);
 
@@ -310,13 +310,13 @@ $qq = $p.pow-mod(1, $c);
 ok(has_coeff($qq));                     # p ** 1 % c
 $qq = $p.pow-mod(2, $c);
 ok(has_coeff($qq));                     # p ** 2 % c
-# $qq = eval { $p->pow-mod(0, $zp) };
+# $qq = EVAL { $p->pow-mod(0, $zp) };
 # ok(!defined $qq);                       # not defined p ** 0 % 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = eval { $p->pow-mod(1, $zp) };
+# $qq = EVAL { $p->pow-mod(1, $zp) };
 # ok(!defined $qq);                       # not defined p ** 1 % 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = eval { $p->pow-mod(2, $zp) };
+# $qq = EVAL { $p->pow-mod(2, $zp) };
 # ok(!defined $qq);                       # not defined p ** 2 % 0
 # ok($@ =~ /division by zero polynomial/);
 $qq = $r.pow-mod(0, $q);
@@ -339,13 +339,13 @@ $qq = $zp.pow-mod(1, $q);
 ok(has_coeff($qq));                     # 0 ** 1 % q
 $qq = $zp.pow-mod(2, $q);
 ok(has_coeff($qq));                     # 0 ** 2 % q
-# $qq = eval { $zp->pow-mod(0, $zp) };
+# $qq = EVAL { $zp->pow-mod(0, $zp) };
 # ok(!defined $qq);                       # not defined 0 ** 0 % 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = eval { $zp->pow-mod(1, $zp) };
+# $qq = EVAL { $zp->pow-mod(1, $zp) };
 # ok(!defined $qq);                       # not defined 0 ** 1 % 0
 # ok($@ =~ /division by zero polynomial/);
-# $qq = eval { $zp->pow-mod(2, $zp) };
+# $qq = EVAL { $zp->pow-mod(2, $zp) };
 # ok(!defined $qq);                       # not defined 0 ** 2 % 0
 # ok($@ =~ /division by zero polynomial/);
 
@@ -430,27 +430,27 @@ ok($pp == $q);                          # || operator long path
 # $Math::Polynomial::max_degree = 9;
 # 
 # $pp = $p->new(0, -1, 0, 1);
-# $qq = eval { $pp ** 3 };
+# $qq = EVAL { $pp ** 3 };
 # ok(has_coeff($qq, 0, 0, 0, -1, 0, 3, 0, -3, 0, 1));
 # $pp = $p->new(0, 4, 0, -5, 0, 1);
-# $qq = eval { $pp ** 2 };
+# $qq = EVAL { $pp ** 2 };
 # ok(!defined($qq) && $@ && $@ =~ /exponent too large/);
-# $qq = eval {
+# $qq = EVAL {
 #     local $Math::Polynomial::max_degree;
 #     $pp ** 2
 # };
 # ok(defined($qq) && $q->isa('Math::Polynomial'));
 # 
-# $qq = eval { $pp << 4 };
+# $qq = EVAL { $pp << 4 };
 # ok(has_coeff($qq, 0, 0, 0, 0, 0, 4, 0, -5, 0, 1));
-# $qq = eval { $pp << 5 };
+# $qq = EVAL { $pp << 5 };
 # ok(!defined($qq) && $@ && $@ =~ /exponent too large/);
-# $qq = eval {
+# $qq = EVAL {
 #     local $Math::Polynomial::max_degree;
 #     $pp << 5
 # };
 # ok(defined($qq) && $q->isa('Math::Polynomial'));
 # 
-# $qq = eval { $p->divmod($p) };
+# $qq = EVAL { $p->divmod($p) };
 # ok(!defined($qq) && $@ && $@ =~ /array context required/);
 

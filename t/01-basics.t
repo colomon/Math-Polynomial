@@ -18,8 +18,8 @@ isa_ok($p5, Math::Polynomial, "Variable is of type Math::Polynomial");
 
 ok $p3.is-zero, "Empty Math::Polynomial.new generates zero polynomial";
 is(~$p, "3 x^2 + 2 x^1 + 1 x^0", "Math::Polynomial.Str works correctly");
-is(~eval($p.perl), ~$p, ".perl works, tested with Str");
-isa_ok(eval($p.perl), Math::Polynomial, ".perl works, tested with isa");
+is(~EVAL($p.perl), ~$p, ".perl works, tested with Str");
+isa_ok(EVAL($p.perl), Math::Polynomial, ".perl works, tested with isa");
 
 is($p5.coefficients.elems, 5, "Leading zero coefficients deleted");
 

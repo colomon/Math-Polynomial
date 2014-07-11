@@ -60,7 +60,7 @@ dies_ok { $p.interpolate([1], 2) }, "Both arguments must be arrays";
 dies_ok { $p.interpolate(1, [2]) }, "Both arguments must be arrays";
 # ok($@ =~ /usage/);
 
-# $r = eval { $p.interpolate([1, 1], [2, 2]) };
+# $r = EVAL { $p.interpolate([1, 1], [2, 2]) };
 # ok(!defined $r);
 # ok($@ =~ /x values not disjoint/);
 

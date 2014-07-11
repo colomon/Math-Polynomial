@@ -53,7 +53,7 @@ ok($qi * $q % $p == $dd.monize);
 
 # # -- diagnostics --
 # 
-# $d = eval { $p.gcd($q, 'nonexistent_method') };
+# $d = EVAL { $p.gcd($q, 'nonexistent_method') };
 # ok(!defined($d) && $@ && $@ =~ /no such method: nonexistent_method/);
 # 
 # my $bad_mod_called = 0;
@@ -66,21 +66,21 @@ ok($qi * $q % $p == $dd.monize);
 #     return $this;
 # }
 # 
-# $d = eval { $p.gcd($q, 'bad_mod') };
+# $d = EVAL { $p.gcd($q, 'bad_mod') };
 # ok(!defined($d) && $@ && $@ =~ /bad modulo operator/);
 # ok(1 == $bad_mod_called);
 # 
-# $d = eval { $p.xgcd($q) };
+# $d = EVAL { $p.xgcd($q) };
 # ok(!defined($d) && $@ && $@ =~ /array context required/);
 # 
 # my $zp = $p - $p;
-# $d = eval { $q.inv_mod($zp) };
+# $d = EVAL { $q.inv_mod($zp) };
 # ok(!defined($d) && $@ && $@ =~ /division by zero polynomial/);
 # 
-# $d = eval { $zp.inv_mod($q) };
+# $d = EVAL { $zp.inv_mod($q) };
 # ok(!defined($d) && $@ && $@ =~ /division by zero polynomial/);
 # 
-# $d = eval { (($x-1)*$q).inv_mod($q) };
+# $d = EVAL { (($x-1)*$q).inv_mod($q) };
 # ok(!defined($d) && $@ && $@ =~ /division by zero polynomial/);
 # 
 # __END__

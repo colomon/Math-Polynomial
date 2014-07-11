@@ -96,36 +96,36 @@ for @samples -> $sample {
 # 
 # $Math::Polynomial::max_degree = 10;
 # 
-# my $q = eval { Math::Polynomial->monomial(10, 20) };
+# my $q = EVAL { Math::Polynomial->monomial(10, 20) };
 # ok($q && $q->isa('Math::Polynomial'));
 # 
-# $q = eval { Math::Polynomial->monomial(11, 1) };
+# $q = EVAL { Math::Polynomial->monomial(11, 1) };
 # ok(!defined($q) && $@ && $@ =~ /exponent too large/);
 # 
-# $q = eval {
+# $q = EVAL {
 #     local $Math::Polynomial::max_degree;
 #     Math::Polynomial->monomial(11, 1)
 # };
 # ok($q && $q->isa('Math::Polynomial'));
 # 
-# $q = eval { $sp->monomial(10, 20) };
+# $q = EVAL { $sp->monomial(10, 20) };
 # ok($q && $q->isa('Math::Polynomial'));
 # 
-# $q = eval { $sp->monomial(11, 1) };
+# $q = EVAL { $sp->monomial(11, 1) };
 # ok(!defined($q) && $@ && $@ =~ /exponent too large/);
 # 
-# $q = eval {
+# $q = EVAL {
 #     local $Math::Polynomial::max_degree;
 #     $sp->monomial(11, 1)
 # };
 # ok($q && $q->isa('Math::Polynomial'));
 # 
 # $q = Math::Polynomial->new(0, 1);
-# my $c = eval { $q->coeff };
+# my $c = EVAL { $q->coeff };
 # ok(
 #     !defined($c) && $@ &&
 #     $@ =~ /array context required if called without argument/
 # );
 # 
-# $c = eval { $q->coefficients };
+# $c = EVAL { $q->coefficients };
 # ok(!defined($c) && $@ && $@ =~ /array context required/);
