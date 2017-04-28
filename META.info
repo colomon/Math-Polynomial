@@ -1,4 +1,5 @@
 {
+    "perl"        : "6.*",
     "name"        : "Math::Polynomial",
     "license"     : "Artistic-2.0",
     "version"     : "*",
