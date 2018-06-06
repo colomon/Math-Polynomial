@@ -1,0 +1,15 @@
+{
+    
+    "perl"          : "6.*",
+    "name"          : "Math::Polynomial",
+    "license"       : "Artistic-2.0",
+    "author"        : "colomon",
+    "version"       : "0.0.1",
+    "description"   : "Simple polynomial class",
+    "provides"      : {
+        "Math::Polynomial": "lib/Math/Polynomial.pm"
+    },
+    "depends"       : [],
+    "source-type"   : "git",
+    "source-url"    : "git://github.com/colomon/Math-Polynomial.git"
+}
